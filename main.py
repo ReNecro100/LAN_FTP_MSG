@@ -11,20 +11,11 @@ from tkinter import *
 from tkinter import ttk
 
 import json
-from FTP_interaction import *
-
-root = Tk()
-root.geometry("300x250")
+from Tkinter_interaction import *
 
 ftp_connection = FTP_connect('192.168.0.1')
+FTP_get_messages(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA/messages', '/volume(sda1)/LAN_FTP_MSG_DATA')
 
-login_entry = ttk.Entry()
-login_entry.pack(anchor=NW, padx=6, pady=6)
-
-password_entry = ttk.Entry()
-password_entry.pack(anchor=NW, padx=6, pady=6)
-
-btn = ttk.Button(text="Log in", command=lambda: FTP_get_logins(ftp_connection, 'volume(sda1)/LAN_FTP_MSG_DATA', login_entry.get(), password_entry.get()))
-btn.pack(anchor=NW, padx=6, pady=6)
-
-root.mainloop()
+if not FTP_check_login(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA'):
+    login_window(ftp_connection)
+main_window(ftp_connection)
