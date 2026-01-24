@@ -81,13 +81,17 @@ def FTP_get_messages(ftp_connection, dir, dir_login):
         system('rd /s /q messages')
         system('md messages')
         last_five_messages = ftp_connection.nlst()[::-1][:5]
+        while len(last_five_messages)<5:
+            last_five_messages.append(f"None{time.time()}.json")
         msgs = []
         for i in range(5):
-            ftp_connection.retrlines(f'RETR {last_five_messages[i]}', msgs.append)
+            if last_five_messages[i][:4]!="None":
+                ftp_connection.retrlines(f'RETR {last_five_messages[i]}', msgs.append)
+            else:
+                msgs.append('{"user": "LAN-FTP-MSG", "date": 0, "message": "nothing"}')
+            print(msgs)
             with open('messages/'+last_five_messages[i], 'w') as f:
                 json.dump(msgs[i], f)
     else:
         pass
     #Eto potom, tochno ne v tekstovom formate
-
-#def FTP_send_message(ftp_connection, dir, message):

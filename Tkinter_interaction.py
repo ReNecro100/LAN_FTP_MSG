@@ -29,5 +29,5 @@ def update_messages_on_the_screen(root, ftp_connection):
         with open(f'messages/{msgs[5 - 1 - i]}', 'r') as msg_file:
             message = json.loads(msg_file.read())
         message = json.loads(message)
-        create_frame('@' + message["user"], message["message"]).grid(row=i + 1, column=0, padx=4, pady=4, columnspan=4)
+        create_frame('@' + message["user"], message["message"]).grid(row=i + 1, column=0, padx=4, pady=4, columnspan=4, sticky="ew")
     root.after(1000, lambda: update_messages_on_the_screen(root, ftp_connection))
