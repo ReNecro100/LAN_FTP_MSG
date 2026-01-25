@@ -14,7 +14,6 @@ import json
 from Tkinter_interaction import *
 
 ftp_connection = FTP_connect('192.168.0.1')
-#FTP_get_messages(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA/messages', '/volume(sda1)/LAN_FTP_MSG_DATA')
 
 if not FTP_check_login(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA'):
     #Окно входа

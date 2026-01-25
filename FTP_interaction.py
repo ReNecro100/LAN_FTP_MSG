@@ -89,7 +89,6 @@ def FTP_get_messages(ftp_connection, dir, dir_login):
                 ftp_connection.retrlines(f'RETR {last_five_messages[i]}', msgs.append)
             else:
                 msgs.append('{"user": "LAN-FTP-MSG", "date": 0, "message": "nothing"}')
-            print(msgs)
             with open('messages/'+last_five_messages[i], 'w') as f:
                 json.dump(msgs[i], f)
     else:
