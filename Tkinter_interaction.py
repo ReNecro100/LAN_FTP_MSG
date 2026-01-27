@@ -11,7 +11,7 @@ def create_frame(user, message):
     label = ttk.Label(frame, text=user)
     label.grid(row=0, column=0, padx=4, pady=4, sticky=W)
 
-    label = ttk.Label(frame, text=message)
+    label = ttk.Label(frame, text=message, wraplength=300)
     label.grid(row=1, column=0, padx=4, pady=4, sticky=W)
 
     return frame

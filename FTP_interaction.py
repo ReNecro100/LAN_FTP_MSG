@@ -93,4 +93,3 @@ def FTP_get_messages(ftp_connection, dir, dir_login):
                 json.dump(msgs[i], f)
     else:
         pass
-    #Eto potom, tochno ne v tekstovom formate

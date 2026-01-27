@@ -1,12 +1,3 @@
-#https://github.com/ReNecro100/LAN_FTP_MSG.git
-
-#Модульность
-#Гит
-#ФТП
-
-"""with open("Z:/messages.txt") as file:
-    print(file.readlines())"""
-# Так можно, но так не интересно
 from tkinter import *
 from tkinter import ttk
 
