@@ -1,12 +1,8 @@
-from tkinter import *
-from tkinter import ttk
-
-import json
 from Tkinter_interaction import *
 
-ftp_connection = FTP_connect('192.168.0.1')
+ftp_connection = Connection('192.168.0.1')
 
-if not FTP_check_login(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA'):
+if not ftp_connection.FTP_check_login('/volume(sda1)/LAN_FTP_MSG_DATA'):
     #Окно входа
     root = Tk()
     root.title('LAN-FTP-MSG')
@@ -28,7 +24,7 @@ if not FTP_check_login(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA'):
     password_entry.grid(row=2, column=1, padx=4, pady=4)
 
     btn = ttk.Button(text="Log in",
-                     command=lambda: FTP_get_logins(ftp_connection, '/volume(sda1)/LAN_FTP_MSG_DATA', login_entry.get(),
+                     command=lambda: ftp_connection.FTP_get_logins('/volume(sda1)/LAN_FTP_MSG_DATA', login_entry.get(),
                                                     password_entry.get(), root))
     btn.grid(row=3, column=1, padx=4, pady=4)
 
@@ -42,7 +38,7 @@ root.geometry("350x500")
 message_entry = ttk.Entry(width=50)
 message_entry.grid(row=0, column=0, padx=4, pady=4, columnspan=3)
 
-btn = ttk.Button(text="➤", width=3, command=lambda: FTP_send_message(ftp_connection, message_entry, '/volume(sda1)/LAN_FTP_MSG_DATA/messages', '/volume(sda1)/LAN_FTP_MSG_DATA', root))
+btn = ttk.Button(text="➤", width=3, command=lambda: ftp_connection.FTP_send_message(message_entry, '/volume(sda1)/LAN_FTP_MSG_DATA/messages', '/volume(sda1)/LAN_FTP_MSG_DATA', root))
 btn.grid(row=0, column=3, padx=4, pady=4)
 
 update_messages_on_the_screen(root, ftp_connection)
