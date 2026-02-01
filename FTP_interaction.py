@@ -70,14 +70,18 @@ class Connection:
             with open(filename, 'rb') as f:
                 self.ftp_connection.storbinary(f'STOR {filename}', f)
             remove(filename)
-            update_messages_on_the_screen(root, self.ftp_connection)
+            update_messages_on_the_screen(root, self)
             entry.delete(0, len(entry.get()))
         else:
             pass
 
-    def FTP_get_messages(self, dir_login):
+    def FTP_get_messages(self, dir_login, dir_messages):
         self.messages = []
         if self.FTP_check_login(dir_login):
+            try:
+                self.ftp_connection.cwd(dir_messages)
+            except:
+                pass
             last_five_messages = self.ftp_connection.nlst()[::-1][:5]
 
             for i in range(5):
